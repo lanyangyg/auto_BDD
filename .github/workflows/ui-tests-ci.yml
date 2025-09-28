@@ -12,8 +12,6 @@ on:
 jobs:
   build-test-and-deploy-report:
     runs-on: ubuntu-latest
-    
-    # 这里的 permissions 设置保持不变
     permissions:
       contents: write
 
@@ -34,20 +32,18 @@ jobs:
       - name: Run UI Tests with Pytest
         run: pytest --alluredir=./allure-results
 
-      # 生成 Allure 报告
-      # 这个 Action 会在虚拟环境中安装 Allure，并根据 allure-results 生成报告
+      # update
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@v1
         with:
-          results_path: allure-results
-          # 这个参数会把历史报告也包含进来，让你的报告有趋势图
-          report_history: true
+          # 修正: 'results_path' 应为 'allure_results'
+          allure_results: allure-results
+          # 默认生成的报告文件夹就是 allure-report
 
-      # 将生成的报告部署到 gh-pages 分支
-      # 这个 Action 是部署到 GitHub Pages 的通用标准做法
+      # update
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # 这个目录是上一步 `simple-elf/allure-report-action` 默认生成的报告文件夹
-          publish_dir: ./allure-history
+          # 部署由上一步默认生成的 'allure-report' 文件夹
+          publish_dir: ./allure-report
