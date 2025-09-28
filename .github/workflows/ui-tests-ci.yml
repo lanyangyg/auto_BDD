@@ -37,9 +37,15 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # 2. 安装 Allure 命令行工具
-      - name: Setup Allure CLI
-        uses: mavimir/setup-allure-cli@v1.1
+      # 2. 手动下载并安装 Allure 命令行工具
+      - name: Manually Install Allure CLI
+        run: |
+          # 下载特定版本的 Allure
+          wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.zip
+          # 解压文件
+          unzip allure-2.29.0.zip
+          # 将 Allure 的 bin 目录添加到系统的 PATH 环境变量中
+          echo "$(pwd)/allure-2.29.0/bin" >> $GITHUB_PATH
 
       # 3. 使用 Allure 命令行工具生成报告
       - name: Generate Allure Report
