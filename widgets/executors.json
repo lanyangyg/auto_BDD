@@ -2,9 +2,9 @@
   "name" : "GitHub Actions",
   "type" : "github",
   "url" : "https://lanyangyg.github.io/auto_BDD",
-  "buildOrder" : 5,
-  "buildName" : "GitHub Actions Run #18069609024",
-  "buildUrl" : "https://github.com/lanyangyg/auto_BDD/actions/runs/18069609024",
+  "buildOrder" : 6,
+  "buildName" : "GitHub Actions Run #18069716598",
+  "buildUrl" : "https://github.com/lanyangyg/auto_BDD/actions/runs/18069716598",
   "reportName" : "Allure Report with history",
-  "reportUrl" : "https://lanyangyg.github.io/auto_BDD/5"
+  "reportUrl" : "https://lanyangyg.github.io/auto_BDD/6"
 } ]
