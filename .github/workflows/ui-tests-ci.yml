@@ -34,6 +34,7 @@ jobs:
         uses: simple-elf/allure-report-action@v1
         with:
           allure_results: allure-results
+          allure_version: 2.27.0
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
