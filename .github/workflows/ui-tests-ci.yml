@@ -37,12 +37,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # 2. 安装最新版的 Allure 命令行工具
-      - name: Setup Allure
-        uses: allure-framework/setup-allurectl@v1
-        with:
-          # 自动安装最新稳定版
-          allure-version: latest
+      # 2. 安装 Allure 命令行工具
+      - name: Setup Allure CLI
+        uses: mavimir/setup-allure-cli@v1.1
 
       # 3. 使用 Allure 命令行工具生成报告
       - name: Generate Allure Report
