@@ -1,4 +1,1 @@
-{
-  "total" : 0,
-  "items" : [ ]
-}
+{"total":2,"items":[{"uid":"b1693e725360ef9efa4d426006ff411e","name":"Login flow","statistic":{"failed":0,"broken":0,"skipped":0,"passed":3,"unknown":0,"total":3}},{"uid":"07d3dfdd0423865568034700dc1f1414","name":"Purchase flow","statistic":{"failed":0,"broken":0,"skipped":0,"passed":3,"unknown":0,"total":3}}]}

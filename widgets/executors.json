@@ -1,10 +1,1 @@
-[ {
-  "name" : "GitHub Actions",
-  "type" : "github",
-  "url" : "https://lanyangyg.github.io/auto_BDD",
-  "buildOrder" : 8,
-  "buildName" : "GitHub Actions Run #18069971515",
-  "buildUrl" : "https://github.com/lanyangyg/auto_BDD/actions/runs/18069971515",
-  "reportName" : "Allure Report with history",
-  "reportUrl" : "https://lanyangyg.github.io/auto_BDD/8"
-} ]
+[]
