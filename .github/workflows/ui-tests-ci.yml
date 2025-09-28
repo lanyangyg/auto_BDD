@@ -1,4 +1,4 @@
-# .github/workflows/ui-tests-ci.yml 
+# .github/workflows/ui-tests-ci.yml
 
 name: auto_BDD UI report
 
@@ -29,31 +29,35 @@ jobs:
 
       - name: Run UI Tests with Pytest
         run: pytest --alluredir=./allure-results
-      
-      # 1. 安装 Java 环境
+
+      # 新增步骤
+      - name: Get historical report data for trendline
+        # 从 gh-pages 分支（上次部署报告的地方）拉取历史数据
+        run: |
+          mkdir -p allure-history
+          git clone --branch gh-pages --single-branch https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git allure-history
+          # 将历史数据拷贝到本次测试结果中
+          cp -r allure-history/history allure-results/history || true
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # 2. 手动下载并安装 Allure 命令行工具
       - name: Manually Install Allure CLI
         run: |
-          # 下载特定版本的 Allure
           wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure-2.29.0.zip
-          # 解压文件
           unzip allure-2.29.0.zip
-          # 将 Allure 的 bin 目录添加到系统的 PATH 环境变量中
           echo "$(pwd)/allure-2.29.0/bin" >> $GITHUB_PATH
 
-      # 3. 使用 Allure 命令行工具生成报告
       - name: Generate Allure Report
         run: allure generate ./allure-results --clean -o ./allure-report
 
-      # 4. 部署报告到 GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./allure-report
+          # 保持历史记录，不清空 gh-pages 分支的 git 历史
+          keep_files: true
