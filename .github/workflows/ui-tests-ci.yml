@@ -30,13 +30,10 @@ jobs:
       - name: Run UI Tests with Pytest
         run: pytest --alluredir=./allure-results
 
-      # 新增步骤
       - name: Get historical report data for trendline
-        # 从 gh-pages 分支（上次部署报告的地方）拉取历史数据
         run: |
           mkdir -p allure-history
           git clone --branch gh-pages --single-branch https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git allure-history
-          # 将历史数据拷贝到本次测试结果中
           cp -r allure-history/history allure-results/history || true
 
       - name: Setup Java
@@ -59,7 +56,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./allure-report
-          # 保持历史记录，不清空 gh-pages 分支的 git 历史
           keep_files: true
 
       # 邮件通知
@@ -67,16 +63,13 @@ jobs:
         if: always()
         uses: dawidd6/action-send-mail@v3
         with:
-          # SMTP 服务器信息 (修改为126邮箱的配置)
           server_address: smtp.126.com
-          server_port: 465 # 126邮箱的SSL端口是465或994，465更常用
+          server_port: 465
           
-          # 邮箱凭证 (从已更新的 GitHub Secrets 读取)
           username: ${{ secrets.MAIL_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD }}
           
-          # 邮件主题
-          subject: "GHA Automation Report - ${{ github.repository }} (构建${{ job.status == 'success' && '成功' || '失败' }})"
+          subject: "自动化测试报告 - ${{ github.repository }} (构建${{ job.status == 'success' && '成功' || '失败' }})"
           
           # 邮件正文
           html_body: |
@@ -85,17 +78,11 @@ jobs:
             <p>仓库: ${{ github.repository }}</p>
             <p>触发事件: ${{ github.event_name }}</p>
             <hr>
-            ${{ if(job.status == 'success') }}
-            <p>最新的 Allure 测试报告已生成，请点击以下链接查看：</p>
-            <a href="https://lanyingyg.github.io/auto_BDD/">https://lanyingyg.github.io/auto_BDD/</a>
-            ${{ else }}
-            <p>构建失败，请点击以下链接查看详细日志：</p>
-            <a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">点击这里查看构建日志</a>
-            ${{ endif }}
+            <p>
+            ${{ job.status == 'success' && '最新的 Allure 测试报告已生成，请点击以下链接查看：<br><a href="https://lanyingyg.github.io/auto_BDD/">https://lanyingyg.github.io/auto_BDD/</a>' || '构建失败，请点击以下链接查看详细日志：<br><a href="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}">点击这里查看构建日志</a>' }}
+            </p>
             <br><br>
             <p><i>此邮件由 GitHub Actions 自动发送。</i></p>
-          
-          # 收件人邮箱
+
           to: fnnnfnnfn@126.com, fnnnfnnfn@163.com
-          # 发件人名字
           from: GitHub Actions CI
