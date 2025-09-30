@@ -8,24 +8,21 @@ if __name__ == '__main__':
     allure_report_dir = 'allure_report'
 
     # 1. 执行 pytest 测试，并生成 Allure 结果
-    # 我们不再需要在 pytest.ini 中指定 --clean-alluredir，在这里手动清理更灵活
+    # 手动清理更
     if os.path.exists(allure_result_dir):
         shutil.rmtree(allure_result_dir)
 
     pytest.main(['-sv', 'tests/', f'--alluredir={allure_result_dir}'])
 
     # 2. 使用 Allure 命令从结果生成 HTML 报告
-    # 首先清理旧的报告
     if os.path.exists(allure_report_dir):
         shutil.rmtree(allure_report_dir)
-
+    # 清理旧的报告生成新报告
     os.system(f'allure generate {allure_result_dir} -o {allure_report_dir} --clean')
 
-    # 3. （可选）自动在浏览器中打开报告
-    # 注意：os.system() 的行为可能因操作系统而异
+    # 3. 生成报告地址
     report_index_file = os.path.join(allure_report_dir, 'index.html')
     print(f"Allure 报告已生成: file://{os.path.abspath(report_index_file)}")
-
 
     # 自动打开报告
     # import webbrowser

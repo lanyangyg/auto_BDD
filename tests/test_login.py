@@ -2,12 +2,12 @@ import pytest
 from pytest_bdd import scenario, given, when, then, parsers
 import allure
 
-# 场景定义（只是将测试与功能文件中的场景关联起来）
+# 场景定义（将测试与feature文件中的场景关联起来）
 @allure.feature("Login flow")
 @allure.story("1.Successful login")
 @scenario("../fixtures/login.feature", "Successful login with valid credentials")
 def test_successful_login():
-    """这个函数体是空的，因为实际测试逻辑在步骤定义中"""
+    # 空的函数体，实际测试逻辑在步骤定义中
     pass
 
 @allure.feature("Login flow")
