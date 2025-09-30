@@ -41,7 +41,7 @@ def verify_confirmation_message(purchase_workflow, message):
     assert purchase_workflow.result.get_confirmation_message() == message
 
 @allure.step('Error message "{message}"')
-@then("I should see an error message")
+@then("I should see a purchase error message")
 def verify_error_message(purchase_workflow):
     # 验证错误消息
     assert "Error" in purchase_workflow.result

@@ -1,1 +1,0 @@
-{"uuid": "c8175c37-24f8-40bf-a2c4-99ca824c2deb", "befores": [{"name": "pytestbdd_stepdef_when_I attempt to complete the purchase process for \"{product_name}\" with invalid information", "status": "passed", "start": 1759213070551, "stop": 1759213070551}], "start": 1759213070551, "stop": 1759213071093}

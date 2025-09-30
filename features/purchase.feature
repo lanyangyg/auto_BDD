@@ -28,4 +28,4 @@ Feature: Complete Purchase Process
 
   Scenario: Failed purchase with invalid information
     When I attempt to complete the purchase process for "Sauce Labs Backpack" with invalid information
-    Then I should see an error message
+    Then I should see a purchase error message

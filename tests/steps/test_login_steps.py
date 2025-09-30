@@ -34,12 +34,12 @@ def verify_app_logo(login_page):
     assert "Swag Labs" in login_page.get_app_logo_message()
 
 @allure.step("Verify error message")
-@then("I should see an error message")
+@then("I should see a login fail error message")
 def verify_error_message(login_page):
     assert "Epic sadface" in login_page.get_error_message()
 
 @allure.step("Verify expected result \"{expected_result}\" ")
-@then(parsers.parse("I should see an expected result \"{expected_result}\""))
+@then(parsers.parse("I should see an expected login result \"{expected_result}\""))
 def verify_expected_result(login_page, expected_result):
     # if "inventory" in expected_result:
     #     login_page.wait_for_url_contains("inventory")

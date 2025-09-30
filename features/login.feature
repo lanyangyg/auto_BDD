@@ -14,14 +14,14 @@ Feature: User Login
     Given I am on the login page
     When I enter username "testuser" and password "secret_sauce"
     And I click the login button
-    Then I should see an error message
+    Then I should see a login fail error message
 
   # 场景大纲(参数化测试)
   Scenario Outline: Login with different credentials
     Given I am on the login page
     When I enter username "<username>" and password "<password>"
     And I click the login button
-    Then I should see an expected result "<expected_result>"
+    Then I should see an expected login result "<expected_result>"
 
     Examples:
       | username        | password       | expected_result |
