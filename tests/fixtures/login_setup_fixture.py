@@ -4,7 +4,7 @@ import pytest
 # Fixture: 提供登录页面对象
 @pytest.fixture(scope="function")
 def login_page(browser):
-    """提供一个未登录页面对象的 fixtures"""
+    """提供一个未登录页面对象的 features"""
     from pages.login_page import LoginPage
     page = LoginPage(browser)
     page.navigate("https://www.saucedemo.com/")

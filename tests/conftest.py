@@ -2,11 +2,11 @@ import pytest
 import os
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-# from tests.fixtures.login_setup_fixture import *
-# from tests.fixtures.purchase_fixture import *
 
-# 注册模块化fixtures
-pytest_plugins = ["tests.fixtures.login_setup_fixture", "tests.fixtures.purchase_fixture"]
+
+# 以插件的形式加载和注册其他 Python 模块中的 fixtures 和 hooks
+pytest_plugins = ["tests.fixtures.login_setup_fixture", "tests.fixtures.purchase_fixture",
+                  "tests.steps.test_login_steps", "tests.steps.test_purchase_steps"]
 
 @pytest.fixture(scope="session")
 def browser():
